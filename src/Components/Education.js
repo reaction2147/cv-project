@@ -21,7 +21,9 @@ class Education extends Component {
 
     render() {
         return(
-            <form>
+            <div>
+                <h2>Education</h2>
+            <form onSubmit = {this.handleSubmit}>
                 <input
                 type= "text"
                 name= "schoolName"
@@ -50,8 +52,10 @@ class Education extends Component {
                 value = {this.state.endDate}
                 onChange = {this.handleChange}
                 />
-                <h1>{this.state.schoolName} {this.state.courseTitle} {this.state.startDate} {this.state.endDate}</h1>
+                <br/>
+               <button>Sumbit</button>
             </form>
+            </div>
         )
     }
 }

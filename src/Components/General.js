@@ -22,6 +22,8 @@ class General extends Component {
 
    render() {
        return (
+           <div>
+               <h2>About you</h2>
            <form>
                <input
                type = "text"
@@ -54,11 +56,10 @@ class General extends Component {
                onChange = {this.handleChange}
                placeholder = "Email" 
                />
-               <h2>{this.state.firstName} {this.state.lastName}</h2>
-               <h2>{this.state.email}</h2>
-               <h2>{this.state.number}</h2>
+               <br />
+            <button>Submit</button>
            </form>
-           
+           </div>
        )
    }
 }      
