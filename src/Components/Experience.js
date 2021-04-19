@@ -8,9 +8,11 @@ class Experience extends Component {
             position : "",
             tasks : "",
             startDate : "",
-            endDate : ""
+            endDate : "",
+            submit : false
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(e) {
@@ -20,24 +22,24 @@ class Experience extends Component {
         })
     }
 
-    handleSumbit(e) {
-        const {name, value} = e.target
+    handleSubmit(e) {
+        e.preventDefault()
         this.setState({
-            [name] : value
-        })
+            submit: true
+        })  
     }
 
     render() {
         return (
             <div>
                 <h2>Your Experience</h2> 
-            <form onSubmit = {this.handleSumbit}>
+            <form onSubmit = {this.handleSubmit}>
                 <input 
                 type = "text"
                 placeholder = "Company Name"
                 value = {this.state.companyName}
-                
                 name = "companyName"
+                onChange = {this.handleChange}
                 />
                 <input 
                 type = "text"
@@ -69,9 +71,13 @@ class Experience extends Component {
                 name = "tasks"
                 />
                 <br/>
-                <button>Sumbit</button>
+                <button>Save</button>
             </form>
-            <p>{this.state.companyName}</p>
+            {
+                this.state.submit ? <p>{this.state.companyName}<br/>{this.state.position}
+                <br/>{this.state.startDate} to {this.state.endDate}
+                <br/>{this.state.tasks}</p> : null
+            }
             </div>
         )
     }

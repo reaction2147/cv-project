@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 
+
 class General extends Component {
     constructor() {
         super()
@@ -7,10 +8,19 @@ class General extends Component {
             firstName: "",
             lastName: "",
             number: "",
-            email: ""
+            email: "",
+            submit: false
     
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        this.setState({
+            submit: true
+        })  
     }
 
     handleChange(e) {
@@ -24,7 +34,7 @@ class General extends Component {
        return (
            <div>
                <h2>About you</h2>
-           <form>
+           <form onSubmit={this.handleSubmit}>
                <input
                type = "text"
                name = "firstName"
@@ -57,11 +67,17 @@ class General extends Component {
                placeholder = "Email" 
                />
                <br />
-            <button>Submit</button>
-           </form>
+            <button type="submit">Save</button>
+           </form> 
+          {
+              this.state.submit ? <p>{this.state.firstName} {this.state.lastName}
+              <br/>{this.state.number}
+              <br/>{this.state.email}</p> : null
+          }
            </div>
        )
    }
 }      
+
 
 export default General

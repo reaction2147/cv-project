@@ -7,9 +7,11 @@ class Education extends Component {
             schoolName : "",
             courseTitle: "",
             startDate: "",
-            endDate: ""
+            endDate: "",
+            submit: false
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(e) {
@@ -17,6 +19,13 @@ class Education extends Component {
         this.setState({
             [name] : value
         })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        this.setState({
+            submit: true
+        })  
     }
 
     render() {
@@ -53,8 +62,12 @@ class Education extends Component {
                 onChange = {this.handleChange}
                 />
                 <br/>
-               <button>Sumbit</button>
+               <button type= "submit">Save</button>
             </form>
+            {
+                this.state.submit ? <p>{this.state.schoolName}<br/>{this.state.courseTitle}
+                <br/>{this.state.startDate} to {this.state.endDate}</p> : null
+            }
             </div>
         )
     }
