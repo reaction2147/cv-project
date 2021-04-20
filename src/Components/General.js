@@ -1,83 +1,81 @@
-import React, {Component} from "react"
+import React, {useState, useEffect, Component} from "react"
 
 
-class General extends Component {
-    constructor() {
-        super()
-        this.state = {
-            firstName: "",
-            lastName: "",
-            number: "",
-            email: "",
-            submit: false
-    
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
+function General() {
+   
+    const [personalInfo, setPersonalInfo] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		number: "", 
+    })
+        const [submit, setsubmit] = useState(false)
+        
+        
 
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault()
-        this.setState({
+        setsubmit({
             submit: true
         })  
     }
 
-    handleChange(e) {
-        const{name, value} = e.target
-        this.setState({
-            [name]: value
-        })
-    }
-
-   render() {
+   function handleChange(e) {
+    const { name, value } = e.target
+    setPersonalInfo({
+        ...personalInfo,
+        [name] : value
+    })
+   }
+   
+   
        return (
            <div>
                <h2>About you</h2>
-           <form onSubmit={this.handleSubmit}>
+           <form onSubmit={handleSubmit}>
                <input
                type = "text"
                name = "firstName"
-               value = {this.state.firstName}
-               onChange={this.handleChange}
+               value = {personalInfo.firstName}
+               onChange={handleChange}
                placeholder="First Name" 
                />
                <br />
                <input
                type= "text"
                name= "lastName"
-               value = {this.state.lastName}
-               onChange = {this.handleChange}
+               value = {personalInfo.lastName}
+               onChange = {handleChange}
                placeholder = "Last Name" 
                />
                <br />
                <input 
                type= "number"
                name= "number"
-               value = {this.state.number}
-               onChange = {this.handleChange}
+               value = {personalInfo.number}
+               onChange = {handleChange}
                placeholder = "Contact Number"
                />
                <br />
                <input
                type= "email"
                name= "email"
-               value = {this.state.email}
-               onChange = {this.handleChange}
+               value = {personalInfo.email}
+               onChange = {handleChange}
                placeholder = "Email" 
                />
                <br />
             <button type="submit">Save</button>
            </form> 
           {
-              this.state.submit ? <p>{this.state.firstName} {this.state.lastName}
-              <br/>{this.state.number}
-              <br/>{this.state.email}</p> : null
+              submit ? <p>{personalInfo.firstName} {personalInfo.lastName}
+              <br/>{personalInfo.number}
+              <br/>{personalInfo.email}</p> : null
           }
            </div>
        )
    }
-}      
+      
 
 
 export default General

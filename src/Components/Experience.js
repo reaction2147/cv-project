@@ -1,86 +1,86 @@
-import React, {Component} from "react"
+import React, {Component, useState, useEffect} from "react"
 
-class Experience extends Component {
-    constructor() {
-        super()
-        this.state = {
+function Experience() {
+
+    
+    const [experience, setExperience] = useState ({
             companyName : "",
             position : "",
             tasks : "",
             startDate : "",
             endDate : "",
-            submit : false
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
+        })
 
-    handleChange(e) {
+        const [submit, setsubmit] = useState(false)
+    
+
+   function  handleChange(e) {
         const {name, value} = e.target
-        this.setState({
+        setExperience({
+            ...experience,
             [name] : value
         })
     }
 
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault()
-        this.setState({
+        setsubmit({
             submit: true
         })  
     }
 
-    render() {
-        return (
+    return (
             <div>
                 <h2>Your Experience</h2> 
-            <form onSubmit = {this.handleSubmit}>
+            <form onSubmit = {handleSubmit}>
                 <input 
                 type = "text"
                 placeholder = "Company Name"
-                value = {this.state.companyName}
+                value = {experience.companyName}
                 name = "companyName"
-                onChange = {this.handleChange}
+                onChange = {handleChange}
                 />
                 <input 
                 type = "text"
                 placeholder = "Position Title"
-                value = {this.state.position}
-                onChange = {this.handleChange}
+                value = {experience.position}
+                onChange = {handleChange}
                 name = "position"
                 />
                 <label for = "start">Start Date</label>
                 <input 
                 type = "date"
-                value = {this.state.startDate}
-                onChange = {this.handleChange}
+                value = {experience.startDate}
+                onChange = {handleChange}
                 name = "startDate"
                 />
                 <label for = "end">End Date</label>
                 <input 
                 type = "date"
-                value = {this.state.endDate}
-                onChange = {this.handleChange}
+                value = {experience.endDate}
+                onChange = {handleChange}
                 name = "endDate"
                 />
                 <br />
                 <textarea 
                 type = "text-area"
                 placeholder = "Job Tasks"
-                value = {this.state.tasks}
-                onChange = {this.handleChange}
+                value = {experience.tasks}
+                onChange = {handleChange}
                 name = "tasks"
                 />
                 <br/>
                 <button>Save</button>
             </form>
             {
-                this.state.submit ? <p>{this.state.companyName}<br/>{this.state.position}
-                <br/>{this.state.startDate} to {this.state.endDate}
-                <br/>{this.state.tasks}</p> : null
+                submit ? <p>{experience.companyName}<br />
+                {experience.position}<br/>
+                {experience.startDate} to {experience.endDate}<br/>
+                {experience.tasks}</p> : null
             }
             </div>
         )
     }
-}
+
 
 export default Experience
